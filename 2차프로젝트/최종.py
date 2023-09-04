@@ -68,25 +68,6 @@ try:
 
     # 변경사항을 커밋
     conn.commit()
-    
-    if conn.is_connected():
-        
-        select_query = 'select * from new_data where solddate <= "2021-04-25"'
-        cursor.execute(select_query)
-        selected_data = cursor.fetchall()
-        
-        if selected_data:
-            for row in selected_data:
-                SOLDDATE = row[0]
-                PRODNAME = row[1]
-                ORDER_QUANT = row[2]
-                SOLD_QUANT = row[3]
-                
-                insert_query = "INSERT INTO dataset00 (SOLDDATE, PRODNAME, ORDER_QUANT, SOLD_QUANT) VALUES (%s, %s, %s, %s)"
-                insert_data = (SOLDDATE, PRODNAME, ORDER_QUANT, SOLD_QUANT)
-                
-                cursor.execute(insert_query, insert_data)
-                conn.commit()
                 
     # 프로시저 호출
     cursor.callproc("Start0")
